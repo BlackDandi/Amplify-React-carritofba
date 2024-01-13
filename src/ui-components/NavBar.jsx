@@ -19,9 +19,10 @@ import CheckPoint from "../Imagenes/Logo.png";
 import Flexcursor from "../Componentes/estilos.module.css"
 export default function NavBar(props) {
   const { overrides, ...rest } = props;
-  const Botoncarrito = () => {
-    window.location.reload();
-  };
+  const Botoncarrito = useNavigateAction({
+    type: "url",
+    url: "/Carrito",
+  });
   const BotonLogo= useNavigateAction({
     type: "url",
     url: "/",

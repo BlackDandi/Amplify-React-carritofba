@@ -5,33 +5,32 @@
  **************************************************************************/
 
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,onValueChange } from 'react';
 import { getOverrideProps } from "./utils";
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 import Foto from "../Imagenes/NFTS1.jpg"
 export default function Tarjeta1(props) {
-  const { onComprarClick,agregarTarjeta, overrides, ...rest } = props;
-  const [contador1, setContador] = useState(0);
+  const {overrides, ...rest } = props;
+  const [contador1, setContador] = useState(() => {
+    // Intentar obtener el valor del contador desde localStorage al cargar la página
+    const storedValue = localStorage.getItem('contadorTarjeta1');
+    // Devolver el valor almacenado o un valor predeterminado si no hay ninguno
+    return storedValue ? parseInt(storedValue, 10) : 0;
+  });
   const incrementarContador = () => {
     setContador(contador1 + 1);
   };
   useEffect(() => {
-    const contadorGuardado = localStorage.getItem('contador1');
-    const contadorGuardadoInt = parseInt(contadorGuardado);
-    console.log("Valor recuperado:", contadorGuardadoInt);
+    const contadorGuardado1 = localStorage.getItem('contador1');
+    const contadorGuardadoInt1 = parseInt(contadorGuardado1);
+    console.log("Valor recuperado:", contadorGuardadoInt1);
     
   }, []);
   
   useEffect(() => {
-    localStorage.setItem('contadorTarjeta1', contador1.toString());
+    localStorage.setItem('contadorTarjeta1', contador1);
     console.log("Contador actualizado:", contador1);
-    
   }, [contador1]);
- 
-  
-
-  
-  
   return (
     <Flex
       gap="0"

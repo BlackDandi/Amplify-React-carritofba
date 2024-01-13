@@ -11,24 +11,21 @@ import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 import Foto from "../Imagenes/sx.jpg";
 export default function Tarjeta4(props) {
   const { overrides, ...rest } = props;
-  const [contador4, setContador] = useState(0);
-  // Función para incrementar el contador
+  const [contador4, setContador] = useState(() => {
+    // Intentar obtener el valor del contador desde localStorage al cargar la página
+    const storedValue4 = localStorage.getItem('contadorTarjeta4');
+    // Devolver el valor almacenado o un valor predeterminado si no hay ninguno
+    return storedValue4 ? parseInt(storedValue4, 10) : 0;
+  });
   const incrementarContador = () => {
     setContador(contador4 + 1);
   };
-
-  // Efecto para cargar el contador desde el almacenamiento local al montar el componente
   useEffect(() => {
-    const contadorGuardado = localStorage.getItem('contadorTarjeta1');
-    if (contadorGuardado) {
-      setContador(parseInt(contadorGuardado, 10));
-    }
+    const contadorGuardado4 = localStorage.getItem('contador4');
+    const contadorGuardadoInt4 = parseInt(contadorGuardado4);
   }, []);
-
-  // Efecto para guardar el contador en el almacenamiento local cada vez que cambie
   useEffect(() => {
-    localStorage.setItem('contadorTarjeta1', contador4.toString());
-    console.log("Contador actualizado:", contador4);
+    localStorage.setItem('contadorTarjeta4', contador4);
   }, [contador4]);
   return (
     <Flex
